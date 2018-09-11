@@ -1,0 +1,78 @@
+{
+  "name": "ipDetail",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ipaddress": {
+      "type": "string",
+      "required": true
+    },
+    "ipint": {
+      "type": "number"
+    },
+    "threat_potential_score_pct": {
+      "type": "number"
+    },
+    "threat_classification": {
+      "type": "string"
+    },
+    "blacklist_class": {
+      "type": "string"
+    },
+    "blacklist_class_cnt": {
+      "type": "number"
+    },
+    "blacklist_network_neighbors": {
+      "type": "number"
+    },
+    "blacklist_observations": {
+      "type": "number"
+    },
+    "country": {
+      "type": "string"
+    },
+    "stateprov": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "zipcode": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "timezone_offset": {
+      "type": "number"
+    },
+    "timezone_name": {
+      "type": "string"
+    },
+    "ispname": {
+      "type": "string"
+    },
+    "network_type": {
+      "type": "string"
+    },
+    "network_group": {
+      "type": "string"
+    },
+    "network_name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
