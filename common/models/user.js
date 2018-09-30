@@ -2,10 +2,44 @@
 var request = require('request');
 
 module.exports = function(User) {
+    User.getOktaUser = (id, cb) => {
+        request.get({
+            headers: {
+                "Acccept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "SSWS 00Zj1am-DZcSHMYVSv0XF6tZzBSvqwLEAUab5sUy9g" 
+            },
+            url: 'https://dev-695454.oktapreview.com/api/v1/users/' + id
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                cb(null, JSON.parse(body));
+            }
+            else{
+                cb(error, response);
+            }
+        });
+    }
+    User.remoteMethod(
+        'getOktaUser', {
+            accepts: [
+                {
+                    arg: 'id',
+                    type:'string',
+                }
+            ],
+            http: {
+                path: '/getOktaUser',
+                verb: 'get'
+            },
+            returns: {
+                arg: 'user',
+                type: 'object'
+            }
+        }
+    );
+
     User.subscribeWithMailChimps = (email_address, status, merge_fields, cb) =>{
-        console.log(email_address);
-        console.log(status);
-        console.log(merge_fields.FNAME);
         request.post({
             headers: { 
                 "Authorization": "apikey e76626b3364bcb99c6235f3231af615b-us19" 
