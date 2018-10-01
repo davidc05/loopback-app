@@ -2,14 +2,14 @@
 var request = require('request');
 
 module.exports = function(User) {
-    User.getOktaUser = (id, cb) => {
+    User.getOktaUser = (userId, cb) => {
         request.get({
             headers: {
                 "Acccept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": "SSWS 00Zj1am-DZcSHMYVSv0XF6tZzBSvqwLEAUab5sUy9g" 
             },
-            url: 'https://dev-695454.oktapreview.com/api/v1/users/' + id
+            url: 'https://dev-695454.oktapreview.com/api/v1/users/' + userId
         },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
@@ -24,7 +24,7 @@ module.exports = function(User) {
         'getOktaUser', {
             accepts: [
                 {
-                    arg: 'id',
+                    arg: 'userId',
                     type:'string',
                 }
             ],
