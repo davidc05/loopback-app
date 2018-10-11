@@ -43,5 +43,9 @@
   "user": {
     "dataSource": "musubu",
     "public": true
+  },
+  "savedSearch": {
+    "dataSource": "musubu",
+    "public": true
   }
 }

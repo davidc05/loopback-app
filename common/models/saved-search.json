@@ -1,0 +1,25 @@
+{
+  "name": "savedSearch",
+  "plural": "savedSearches",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "userEmail": {
+      "type": "string",
+      "required": true
+    },
+    "ips": {
+      "type": [
+        "string"
+      ],
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
