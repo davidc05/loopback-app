@@ -7,6 +7,15 @@
     "validateUpsert": true
   },
   "properties": {
+    "queryName": {
+      "type": "string",
+      "required": true
+    },
+    "createdOn": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
+    },
     "userEmail": {
       "type": "string",
       "required": true
