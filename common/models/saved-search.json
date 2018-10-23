@@ -11,6 +11,10 @@
       "type": "string",
       "required": true
     },
+    "description": {
+      "type": "string",
+      "required": false
+    },
     "createdOn": {
       "type": "date",
       "required": true,
