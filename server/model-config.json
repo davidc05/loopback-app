@@ -47,5 +47,9 @@
   "savedSearch": {
     "dataSource": "musubu",
     "public": true
+  },
+  "tag": {
+    "dataSource": "musubu",
+    "public": true
   }
 }
