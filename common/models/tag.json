@@ -19,7 +19,8 @@
       "type": [
         "string"
       ],
-      "required": true
+      "required": true,
+      "default": []
     },
     "createdOn": {
       "type": "date",
