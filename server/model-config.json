@@ -51,5 +51,9 @@
   "tag": {
     "dataSource": "musubu",
     "public": true
+  },
+  "ipRange": {
+    "dataSource": "musubu",
+    "public": true
   }
 }

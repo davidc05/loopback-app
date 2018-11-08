@@ -1,0 +1,32 @@
+{
+  "name": "ipRange",
+  "plural": "ipRanges",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ip_start_int": {
+      "type": "string",
+      "required": true
+    },
+    "ip_end_int": {
+      "type": "string",
+      "required": true
+    },
+    "network_name": {
+      "type": "string"
+    },
+    "network_type": {
+      "type": "string"
+    },
+    "network_group": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
