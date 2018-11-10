@@ -23,6 +23,10 @@
       "type": "string",
       "required": true,
       "default": "free"
+    },
+    "isAdmin": {
+      "type": "boolean",
+      "required": false
     }
   },
   "validations": [],
