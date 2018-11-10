@@ -13,11 +13,16 @@
     },
     "firstName": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "lastName": {
       "type": "string",
-      "required": true
+      "required": false
+    },
+    "subscriptionPlan": {
+      "type": "string",
+      "required": true,
+      "default": "free"
     }
   },
   "validations": [],

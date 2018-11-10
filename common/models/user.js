@@ -2,6 +2,8 @@
 var request = require('request');
 
 module.exports = function(User) {
+    User.validatesInclusionOf('subscriptionPlan', {in: ['free', 'small', 'medium', 'large']});
+
     User.getOktaUser = (userId, cb) => {
         request.get({
             headers: {
