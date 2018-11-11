@@ -1,5 +1,5 @@
 {
-  "name": "subscription-plan",
+  "name": "subscriptionPlan",
   "plural": "subscriptionPlans",
   "base": "PersistedModel",
   "idInjection": true,

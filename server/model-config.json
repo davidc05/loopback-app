@@ -56,7 +56,7 @@
     "dataSource": "musubu",
     "public": true
   },
-  "subscription-plan": {
+  "subscriptionPlan": {
     "dataSource": "musubu",
     "public": true
   }
