@@ -1,0 +1,25 @@
+{
+  "name": "subscription-plan",
+  "plural": "subscriptionPlans",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "default": "free"
+    },
+    "ipQueryLimit": {
+      "type": "number",
+      "required": true,
+      "default": 50
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

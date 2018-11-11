@@ -55,5 +55,9 @@
   "ipRange": {
     "dataSource": "musubu",
     "public": true
+  },
+  "subscription-plan": {
+    "dataSource": "musubu",
+    "public": true
   }
 }
