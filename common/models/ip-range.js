@@ -27,7 +27,7 @@ module.exports = function(IpRange) {
     );
 
     IpRange.getIpDetailRangesByNetworkType = function(networkType, cb) {
-        request('https://api.musubu.io/MusubuAPI/Musubu?NetworkType='+networkName+'&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&level=verbose', function (error, response, body) {
+        request('https://api.musubu.io/MusubuAPI/Musubu?NetworkType='+networkType+'&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&level=verbose', function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 cb(null, JSON.parse(body));
             }
