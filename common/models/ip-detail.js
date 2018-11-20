@@ -36,7 +36,7 @@ module.exports = function(IpDetail) {
                         }
                         try{
                             resolve(JSON.parse(body));
-                        } 
+                        }
                         catch(e){
                             reject(e);
                         }
