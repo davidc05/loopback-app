@@ -66,9 +66,9 @@ module.exports = function(IpRange) {
       }
   );
 
-  IpRange.getIpDetailRangesByIspName = function(ispName, cb) {
+  IpRange.getIpDetailRangesByIspName = function(ispName, pageNum, cb) {
     request(
-      `https://api.musubu.io/MusubuAPI/Musubu?ISP=${ispName.replace(/&/gi, '%26')}&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&level=verbose`,
+      `https://api.musubu.io/MusubuAPI/Musubu?ISP=${ispName.replace(/&/gi, '%26')}&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&page=${pageNum}&level=verbose`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));
@@ -77,10 +77,16 @@ module.exports = function(IpRange) {
   };
   IpRange.remoteMethod(
       'getIpDetailRangesByIspName', {
-        accepts: {
-          arg: 'ispName',
-          type: 'string',
-        },
+        accepts: [
+          {
+            arg: 'ispName',
+            type: 'string',
+          },
+          {
+            arg: 'pageNum',
+            type: 'string',
+          },
+        ],
         http: {
           path: '/getIpDetailRangesByIspName',
           verb: 'get',
