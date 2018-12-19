@@ -210,7 +210,7 @@ module.exports = function(IpRange) {
 
   IpRange.getIpDetailRangesByBlacklistNeighbors = function(blacklistNeighbors, cb) {
     request(
-      `${apiUrl}?IP=${blacklistNeighbors}&key=${serverConfig.apiKey}&format=JSON&level=verbose&listneighbors=true&ipnotation=string`,
+      `${apiUrl}IP=${blacklistNeighbors}&key=${serverConfig.apiKey}&format=JSON&level=verbose&listneighbors=true&ipnotation=string`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));
