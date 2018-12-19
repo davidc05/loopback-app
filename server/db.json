@@ -1,0 +1,11 @@
+{
+    "lbIP": "172.31.32.139",
+    "user": "tomcat_api",
+    "password": "72a363b79d4e6dfa5415af043f7d2655",
+    "database": "JEDIBADGERDB",
+    "connector": "mariadb",
+    "ipaddress": "172.31.17.60",
+    "port": 3306,
+    "driver": "org.mariadb.jdbc.Driver"
+
+}

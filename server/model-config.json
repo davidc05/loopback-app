@@ -59,5 +59,9 @@
   "subscriptionPlan": {
     "dataSource": "musubu",
     "public": true
+  },
+  "MusubuAPI": {
+    "dataSource": "musubu",
+    "public": true
   }
 }
