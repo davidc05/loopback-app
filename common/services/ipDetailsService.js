@@ -136,7 +136,7 @@ module.exports = {
                 connection.query(sqlGetNeighborCnt, function (error, results, fields) {
                     if (error) throw error;
                     results.forEach(function(row){
-                        blacklist_network_neighbor_cnt = row.blacklist_network_neighbor_cnt;
+                        blacklist_network_neighbor_cnt = row.blacklist_network_neighbors;
                     });
                     callback(null);
                 });
