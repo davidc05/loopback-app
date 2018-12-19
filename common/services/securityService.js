@@ -9,7 +9,6 @@ module.exports = {
         var promise = new Promise(
             (resolve, reject) => {
                 connection.query(sqlCheckKeyEnabled, function (error, results, fields) {
-                    console.log("API KEY: " + results)
                     if (error) return reject(error);
                     try{
                         if(!results || results.length === 0){

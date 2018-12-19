@@ -3,7 +3,6 @@ var ipDetail = require("./ip-detail");
 const ipDetailsService = require('../services/ipDetailsService');
 const ipRangesService = require('../services/ipRangesService');
 const securityService = require('../services/securityService');
-const dbConfig = require("../configs/dbConfig.json");
 
 module.exports = function(Musubuapi) {
     Musubuapi.Musubu = (ip, format, verbosity, key, listNeighbors, isp, networkName, networkType, networkGroup, page, pageBy, notation, cb) => {
@@ -14,7 +13,6 @@ module.exports = function(Musubuapi) {
                 page = page ? page : 1;
                 pageBy = pageBy ? pageBy : 50;
                 notation = "dot";
-                console.log("THE OBJ: " + JSON.stringify(ipDetail));
                 if(ip){
                     ipDetailsService.getIpDetail(ip, listNeighbors, verbosity, notation, cb);
                 }
@@ -46,11 +44,11 @@ module.exports = function(Musubuapi) {
                 type: 'string',
             },
             {
-                arg: 'Format',
+                arg: 'format',
                 type: 'string',
             },
             {
-                arg: 'Level',
+                arg: 'level',
                 type: 'string',
             },
             {
@@ -95,8 +93,8 @@ module.exports = function(Musubuapi) {
             verb: 'get',
           },
           returns: {
-            arg: 'ipRanges',
             type: 'object',
+            root: true
           },
         }
     );

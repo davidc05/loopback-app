@@ -50,7 +50,6 @@ module.exports ={
             (callback) => {
             connection.query(sqlGetKNCount, function (error, results, fields) {
                 if (error) throw error;
-                console.log("Results: " + JSON.stringify(results));
                 results.forEach(function(row){
                     resultCount = row.knownNetworksCount;
                 });
@@ -61,7 +60,6 @@ module.exports ={
             if((resultCount > 0) && ((page - 1)*pageBy < resultCount)) { // don't try to paginate past the end of the list
                 connection.query(sqlGetKNPaged, function (error, results, fields) {
                 if (error) throw error;
-                console.log("Results: " + JSON.stringify(results));
                 var entries = [];
                 results.forEach(function(row){
                     if(notation.toLowerCase() === "int") {
@@ -147,7 +145,6 @@ module.exports ={
             (callback) => {
             connection.query(sqlGetISPCount, function (error, results, fields) {
                 if (error) throw error;
-                console.log("Results: " + JSON.stringify(results));
                 results.forEach(function(row){
                     resultCount = row.sqlGetISPCount;
                 });
@@ -158,7 +155,6 @@ module.exports ={
             if((resultCount > 0) && ((page - 1)*pageBy < resultCount)) { // don't try to paginate past the end of the list
                 connection.query(sqlGetISPPaged, function (error, results, fields) {
                 if (error) throw error;
-                console.log("Results: " + JSON.stringify(results));
                 var entries = [];
                 results.forEach(function(row){
                     entries.push({

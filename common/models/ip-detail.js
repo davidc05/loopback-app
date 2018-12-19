@@ -1,14 +1,12 @@
 var request = require('request');
-const mysql = require("mysql");
-const async = require('async');
-const ipHelpers = require('../services/ipHelpers');
+const serverConfig = require('../../server/server-config')
 const ipDetailsService = require('../services/ipDetailsService');
-const dbConfig = require("../configs/dbConfig.json");
+const apiUrl = `${serverConfig.host}:${serverConfig.port}/api/MusubuAPI/Musubu?`;
 
 module.exports = function(IpDetail) {
     //Defining endpoints
     IpDetail.getIpDetailFromMusubuAPI = function(ip, cb) {
-        request('https://api.musubu.io/MusubuAPI/Musubu?IP='+ip+'&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&level=verbose', function (error, response, body) {
+        request(`${apiUrl}IP=${ip}&key=${serverConfig.apiKey}&format=JSON&level=verbose`, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 cb(null, JSON.parse(body));
             }
@@ -76,18 +74,11 @@ module.exports = function(IpDetail) {
     )
 
     IpDetail.getIpsDetail = function(ips, cb) {
-
-
-
-
-        
-
-
         var ipDetailPromises = [];
         for(var i in ips){
             var promise = new Promise(
                 (resolve, reject) => {
-                    request('https://api.musubu.io/MusubuAPI/Musubu?IP='+ips[i]+'&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&level=verbose', function (error, response, body) {
+                    request(`${apiUrl}IP=${ips[i]}&key=${serverConfig.apiKey}&format=JSON&level=verbose`, function (error, response, body) {
                         if (error || response.statusCode != 200) {
                             return reject(error);
                         }
@@ -105,19 +96,9 @@ module.exports = function(IpDetail) {
 
         Promise.all(ipDetailPromises).then(
             values => {
-                console.log(values);
                 cb(null, values);
             }
         )
-
-
-
-
-
-
-
-
-
     };
     IpDetail.remoteMethod(
         'getIpsDetail', {

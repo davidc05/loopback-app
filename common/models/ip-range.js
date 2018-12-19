@@ -1,9 +1,7 @@
 var request = require('request');
-const mysql = require("mysql");
-const async = require('async');
 const ipRangesService = require('../services/ipRangesService');
-const ipHelpers = require('../services/ipHelpers');
-const dbConfig = require("../configs/dbConfig.json");
+const serverConfig = require('../../server/server-config')
+const apiUrl = `${serverConfig.host}:${serverConfig.port}/api/MusubuAPI/Musubu?`;
 
 module.exports = function(IpRange) {
   IpRange.getIpRangeByNetwork = (networkName, networkType, networkGroup, page, pageBy, notation, cb) => {
@@ -52,7 +50,7 @@ module.exports = function(IpRange) {
 
   IpRange.getIpDetailRangesByNetworkName = function(networkName, pageNum, cb) {
     request(
-      `https://api.musubu.io/MusubuAPI/Musubu?NetworkName=${networkName}&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&page=${pageNum}&level=verbose`,
+      `${apiUrl}NetworkName=${networkName}&key=${serverConfig.apiKey}&format=JSON&page=${pageNum}&level=verbose`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));
@@ -84,7 +82,7 @@ module.exports = function(IpRange) {
 
   IpRange.getIpDetailRangesByNetworkType = function(networkType, pageNum, cb) {
     request(
-      `https://api.musubu.io/MusubuAPI/Musubu?NetworkType=${networkType}&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&page=${pageNum}&level=verbose`,
+      `${apiUrl}NetworkType=${networkType}&key=${serverConfig.apiKey}&format=JSON&page=${pageNum}&level=verbose`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));
@@ -148,7 +146,7 @@ module.exports = function(IpRange) {
 
   IpRange.getIpDetailRangesByIspName = function(ispName, pageNum, cb) {
     request(
-      `https://api.musubu.io/MusubuAPI/Musubu?ISP=${ispName.replace(/&/gi, '%26')}&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&page=${pageNum}&level=verbose`,
+      `${apiUrl}ISP=${ispName.replace(/&/gi, '%26')}&key=${serverConfig.apiKey}&format=JSON&page=${pageNum}&level=verbose`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));
@@ -180,7 +178,7 @@ module.exports = function(IpRange) {
 
   IpRange.getIpDetailRangesByNetworkGroup = function(networkGroup, pageNum, cb) {
     request(
-      `https://api.musubu.io/MusubuAPI/Musubu?NetworkGroup=${networkGroup}&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&page=${pageNum}&level=verbose`,
+      `${apiUrl}?NetworkGroup=${networkGroup}&key=${serverConfig.apiKey}&format=JSON&page=${pageNum}&level=verbose`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));
@@ -212,7 +210,7 @@ module.exports = function(IpRange) {
 
   IpRange.getIpDetailRangesByBlacklistNeighbors = function(blacklistNeighbors, cb) {
     request(
-      `https://api.musubu.io/MusubuAPI/Musubu?IP=${blacklistNeighbors}&key=b9c4896dd776e2e61a937a01aa3d1ac8&format=JSON&level=verbose&listneighbors=true&ipnotation=string`,
+      `${apiUrl}?IP=${blacklistNeighbors}&key=${serverConfig.apiKey}&format=JSON&level=verbose&listneighbors=true&ipnotation=string`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));

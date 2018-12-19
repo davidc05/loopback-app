@@ -86,7 +86,6 @@ module.exports = {
             (callback) => {
                 connection.query(sqlPFGetCountryASN, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("Results: " + JSON.stringify(results));
                     results.forEach(function(row){
                         country_code = row.country;
                         network_names.push(row.network_asn_name);
@@ -100,7 +99,6 @@ module.exports = {
                 
                 connection.query(sqlSWGetCountrySource, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("Results: " + JSON.stringify(results));
                     results.forEach(function(row){
                         country_code = row.country_code;
                         sw_source = row.source;
@@ -117,7 +115,6 @@ module.exports = {
                 
                 connection.query(sqlGetCountry, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("Results: " + JSON.stringify(results));
                     results.forEach(function(row){
                         country_code = row.country;
                         stateprov = row.stateprov;
@@ -138,7 +135,6 @@ module.exports = {
             (callback) => {
                 connection.query(sqlGetNeighborCnt, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("Results: " + JSON.stringify(results));
                     results.forEach(function(row){
                         blacklist_network_neighbor_cnt = row.blacklist_network_neighbor_cnt;
                     });
@@ -151,7 +147,6 @@ module.exports = {
                     blacklist_network_neighbors = [];
                     connection.query(sqlGetNeighbors, function (error, results, fields) {
                         if (error) throw error;
-                        console.log("Results: " + JSON.stringify(results));
                         results.forEach(function(row){
                             blacklist_network_neighbors.push(row.ipint);
                         });
@@ -168,7 +163,6 @@ module.exports = {
             (callback) => {
                 connection.query(sqlGetRecentObs, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("Results: " + JSON.stringify(results));
                     results.forEach(function(row){
                         blacklist_observations = row.blacklist_observations;
                     });
@@ -179,7 +173,6 @@ module.exports = {
             (callback) => {
                 connection.query(sqlGetBLClassCnt, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("BLACKLIST_CLASS_CNT: " + JSON.stringify(results));
                     results.forEach(function(row){
                         blacklist_class_cnt = row.blacklist_class_cnt;
                     });
@@ -190,7 +183,6 @@ module.exports = {
             (callback) => {
                 connection.query(sqlGetNetClassType, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("Results: " + JSON.stringify(results));
                     var tmp = "";
                     results.forEach(function(row){
                         ipaddress = row.ipaddress;
@@ -212,7 +204,6 @@ module.exports = {
                 var count = 0;
                 connection.query(sqlGetKnownNetwork, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("Results: " + JSON.stringify(results));
                     results.forEach(function(row){
                         count++;
                         var tmp = row.network_name;
@@ -233,7 +224,6 @@ module.exports = {
                         sqlGetTicpi += "'" + country_code + "'";
                         connection.query(sqlGetTicpi, function (error, results, fields) { 
                             if (error) throw error;
-                            console.log("Results: " + JSON.stringify(results));
                             results.forEach(function(row){
                                 network_ticpi = row.country_ticpi;
                             });
@@ -256,7 +246,6 @@ module.exports = {
                     sqlGetBLClassThreatlevel += "'" + blacklist_class + "'";
                     connection.query(sqlGetBLClassThreatlevel, function (error, results, fields) { 
                         if (error) throw error;
-                        console.log("BLACKLIST THREAT: " + JSON.stringify(results));
                         results.forEach(function(row){
                             blclass_threatlevel = row.threatlevel;
                         });
@@ -278,7 +267,6 @@ module.exports = {
                     sqlGetBlacklistClassDisp += "'" + blacklist_class + "'";
                     connection.query(sqlGetBlacklistClassDisp, function (error, results, fields) {
                         if (error) throw error;
-                        console.log("BLACKLIST DISPLAY: " + JSON.stringify(results));
                         results.forEach(function(row){
                             blacklist_class_disp = row.displayval;
                         });
@@ -292,7 +280,6 @@ module.exports = {
                 var cur, nt_max = 0;
                 connection.query(sqlGetNeighborhoodThreatlevels, function (error, results, fields) {
                     if (error) throw error;
-                    console.log("THREAT LEVELS: " + JSON.stringify(results));
                     results.forEach(function(row){
                         cur = row.threatlevel;
                         if(cur>nt_max)
