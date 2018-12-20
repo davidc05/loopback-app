@@ -5,7 +5,7 @@ const apiUrl = `${serverConfig.host}:${serverConfig.port}/api/MusubuAPI/Musubu?`
 
 module.exports = function(IpRange) {
   IpRange.getIpRangeByNetwork = (networkName, networkType, networkGroup, page, pageBy, notation, cb) => {
-    ipRangesService.knownNetworkLookup(networkName, networkType, networkGroup, 
+    ipRangesService.knownNetworkLookup(networkName, networkType, networkGroup,
       page, pageBy, notation, cb);
   }
   IpRange.remoteMethod(
@@ -113,7 +113,7 @@ module.exports = function(IpRange) {
   );
 
   IpRange.getIpRangeByIsp = (isp, page, pageBy, cb) => {
-    ipRangesService.ispLookup(isp, 
+    ipRangesService.ispLookup(isp,
       page, pageBy, cb);
   }
   IpRange.remoteMethod(
@@ -146,7 +146,7 @@ module.exports = function(IpRange) {
 
   IpRange.getIpDetailRangesByIspName = function(ispName, pageNum, cb) {
     request(
-      `${apiUrl}ISP=${ispName.replace(/&/gi, '%26')}&key=${serverConfig.apiKey}&format=JSON&page=${pageNum}&level=verbose`,
+      `${apiUrl}ISP=${ispName}&key=${serverConfig.apiKey}&format=JSON&page=${pageNum}&level=verbose`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));
@@ -178,7 +178,7 @@ module.exports = function(IpRange) {
 
   IpRange.getIpDetailRangesByNetworkGroup = function(networkGroup, pageNum, cb) {
     request(
-      `${apiUrl}?NetworkGroup=${networkGroup}&key=${serverConfig.apiKey}&format=JSON&page=${pageNum}&level=verbose`,
+      `${apiUrl}NetworkGroup=${networkGroup}&key=${serverConfig.apiKey}&format=JSON&page=${pageNum}&level=verbose`,
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           cb(null, JSON.parse(body));
