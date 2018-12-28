@@ -52,6 +52,10 @@
     "dataSource": "musubu",
     "public": true
   },
+  "note": {
+    "dataSource": "musubu",
+    "public": true
+  },
   "ipRange": {
     "dataSource": "musubu",
     "public": true
