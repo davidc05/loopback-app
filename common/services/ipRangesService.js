@@ -3,7 +3,7 @@ const async = require('async');
 const ipHelpers = require('./ipHelpers');
 const dbConfig = require("../configs/dbConfig.json");
 module.exports ={
-    knownNetworkLookup: (networkName, networkType, networkGroup, 
+    knownNetworkLookup: (networkName, networkType, networkGroup,
         page, pageBy, notation, cb) => {
         var resultCount = 0;
         var resultsPage = undefined;
@@ -14,8 +14,8 @@ module.exports ={
         var nw_group = undefined;
 
         //Default pages
-        page = 1;
-        pageBy = 50;
+        page = page ? page : 1;
+        pageBy = pageBy ? pageBy : 50;
         notation = "string";
 
         var finalResult = {};
@@ -26,17 +26,17 @@ module.exports ={
         var where = "";
         if(networkName)
             where += "network_name like \'" + networkName + "\'";
-        
+
         if((networkType) && (where.length > 0))
             where += " and network_type like \'" + networkType + "\'";
         else if (networkType != null)
             where += "network_type like \'" + networkType+ "\'";
-        
+
         if((networkGroup) && (where.length > 0))
             where += " and network_group like \'" + networkGroup+ "\'";
         else if (networkGroup)
             where += "network_group like \'" + networkGroup+ "\'";
-        
+
         // first we count
         var sqlGetKNCount = "select count(*) as knownNetworksCount from caatu_known_networks " +
                     "where " + where;
@@ -78,16 +78,16 @@ module.exports ={
                         network_type: row.network_type,
                         network_group: row.network_group
                     });
-                    
+
                     }
-                    
+
                 });
 
                 finalResult.result_count = resultCount;
                 finalResult.result_page = page;
                 finalResult.page_size = entries.length;
                 finalResult.entries = entries;
-                
+
                 connection.end();
                 callback(null);
                 cb(null, finalResult)
@@ -97,7 +97,7 @@ module.exports ={
                 finalResult.result_count = 0;
                 finalResult.result_page = page;
                 finalResult.page_size = 0;
-                connection.end(); 
+                connection.end();
                 callback(null);
                 cb(null, finalResult)
             }
@@ -123,8 +123,8 @@ module.exports ={
         var isp_name = undefined;
 
         //Default pages
-        page = 1;
-        pageBy = 50;
+        page = page ? page : 1;
+        pageBy = pageBy ? pageBy : 50;
 
         var finalResult = {};
 
@@ -178,7 +178,7 @@ module.exports ={
                 finalResult.result_page = page;
                 finalResult.page_size = entries.length;
                 finalResult.entries = entries;
-                
+
                 connection.end();
                 callback(null);
                 cb(null, finalResult)
@@ -188,7 +188,7 @@ module.exports ={
                 finalResult.result_count = 0;
                 finalResult.result_page = page;
                 finalResult.page_size = 0;
-                connection.end(); 
+                connection.end();
                 callback(null);
                 cb(null, finalResult)
             }
