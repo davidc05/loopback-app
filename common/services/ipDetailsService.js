@@ -96,7 +96,6 @@ module.exports = {
             },
             // check Shadow Warrior next, set country and blacklist_class if present
             (callback) => {
-                
                 connection.query(sqlSWGetCountrySource, function (error, results, fields) {
                     if (error) throw error;
                     results.forEach(function(row){
@@ -187,9 +186,8 @@ module.exports = {
                     results.forEach(function(row){
                         ipaddress = row.ipaddress;
                         ipint = row.ipint;
-                        tmp = blacklist_class;
+                        tmp = row.blacklist_class;
                     });
-
                     if(ipaddress.length == 0)
 					    ipaddress = ip;
 				    if(blacklist_class.toLowerCase() === "unlisted" && (tmp.length > 0))
