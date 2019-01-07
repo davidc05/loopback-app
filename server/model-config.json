@@ -67,5 +67,9 @@
   "MusubuAPI": {
     "dataSource": "musubu",
     "public": true
+  },
+  "apiKey": {
+    "dataSource": "musubu",
+    "public": true
   }
 }

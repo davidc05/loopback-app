@@ -1,0 +1,42 @@
+{
+  "name": "apiKey",
+  "plural": "apiKeys",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "key": {
+      "type": "string",
+      "required": true
+    },
+    "userId": {
+      "type": "string",
+      "required": true
+    },
+    "expiresAt": {
+      "type": "date"
+    },
+    "totalCalls": {
+      "type": "number"
+    },
+    "callLimit": {
+      "type": "number"
+    },
+    "whitelistIps": {
+      "type": [
+        "string"
+      ]
+    },
+    "createdOn": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
