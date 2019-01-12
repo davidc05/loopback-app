@@ -3,11 +3,16 @@ var ipDetail = require("./ip-detail");
 const ipDetailsService = require('../services/ipDetailsService');
 const ipRangesService = require('../services/ipRangesService');
 const securityService = require('../services/securityService');
+var request = require('request');
+const serverConfig = require('../../server/server-config')
+const apiUrl = `${serverConfig.host}:${serverConfig.port}/api/apiKeys/checkKey?`;
 
 module.exports = function(Musubuapi) {
     Musubuapi.Musubu = (ip, format, verbosity, key, listNeighbors, isp, networkName, networkType, networkGroup, page, pageBy, notation, cb) => {
-        securityService.checkKey(key).then(
-            result => {
+        //Check for key
+        request(`${apiUrl}key=${key}`, function (error, response, body) {
+            var jsonResponse = JSON.parse(body);
+            if (jsonResponse.keyResult && jsonResponse.keyResult.status === "OK") {
                 format = "JSON";
                 verbosity = verbosity ? verbosity : "terse"
                 page = page ? page : 1;
@@ -28,13 +33,11 @@ module.exports = function(Musubuapi) {
                     error.statusCode = 400;
                     cb(error);
                 }
-            },
-            err => {
-                cb(err);
             }
-        )
-        
-
+            else{
+                cb(null, JSON.parse(body));
+            }
+        });
     }
     Musubuapi.remoteMethod(
         'Musubu', {

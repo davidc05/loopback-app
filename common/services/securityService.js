@@ -28,8 +28,5 @@ module.exports = {
             }
         )
         return promise;
-    },
-    checkKeyAndLimits: (key) => {
-        
     }
 }
