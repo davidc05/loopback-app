@@ -19,7 +19,8 @@
       "type": "date"
     },
     "totalCalls": {
-      "type": "number"
+      "type": "number",
+      "default": 0
     },
     "callLimit": {
       "type": "number"
