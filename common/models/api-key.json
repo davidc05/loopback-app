@@ -27,7 +27,8 @@
     "whitelistIps": {
       "type": [
         "string"
-      ]
+      ],
+      "default": []
     },
     "createdOn": {
       "type": "date",
