@@ -1,7 +1,7 @@
 var request = require('request');
 const serverConfig = require('../../server/server-config')
 const ipDetailsService = require('../services/ipDetailsService');
-const apiUrl = `${serverConfig.host}:${serverConfig.port}/api/MusubuAPI/Musubu?`;
+const apiUrl = `${serverConfig.host}:${serverConfig.port}/MusubuAPI/Musubu?`;
 
 module.exports = function(IpDetail) {
     //Defining endpoints

@@ -1,7 +1,7 @@
 var request = require('request');
 const ipRangesService = require('../services/ipRangesService');
 const serverConfig = require('../../server/server-config')
-const apiUrl = `${serverConfig.host}:${serverConfig.port}/api/MusubuAPI/Musubu?`;
+const apiUrl = `${serverConfig.host}:${serverConfig.port}/MusubuAPI/Musubu?`;
 
 module.exports = function(IpRange) {
   IpRange.getIpRangeByNetwork = (networkName, networkType, networkGroup, page, pageBy, notation, cb) => {

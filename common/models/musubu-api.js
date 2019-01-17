@@ -5,7 +5,7 @@ const ipRangesService = require('../services/ipRangesService');
 const securityService = require('../services/securityService');
 var request = require('request');
 const serverConfig = require('../../server/server-config')
-const apiUrl = `${serverConfig.host}:${serverConfig.port}/api/apiKeys/checkKey?`;
+const apiUrl = `${serverConfig.host}:${serverConfig.port}/apiKeys/checkKey?`;
 
 module.exports = function(Musubuapi) {
     Musubuapi.Musubu = (ip, format, verbosity, key, listNeighbors, isp, networkName, networkType, networkGroup, page, pageBy, notation, cb) => {
