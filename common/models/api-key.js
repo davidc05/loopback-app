@@ -1,5 +1,6 @@
 'use strict';
 var request = require('request');
+const moment = require('moment');
 const uuidAPIKey = require('uuid-apikey');
 
 module.exports = function(Apikey) {
@@ -20,38 +21,52 @@ module.exports = function(Apikey) {
             }, (err, result) => {
                 if(result && result.length !== 0){
                     var apiKey = result[0];
-                    if(apiKey.totalCalls < apiKey.callLimit){
-                        //Check the IP whitelist
-                        if(apiKey.whitelistIps && apiKey.whitelistIps.includes(req.ip)){
-                            //Now that all checks are done, make sure we increase the totalCalls by 1.
-                            Apikey.updateAll({id: apiKey.id}, {totalCalls: apiKey.totalCalls + 1}, (err, result) =>{
-                                if(!err){
-                                    cb(null, {
-                                        key: apiKey.key,
-                                        status: "OK"
-                                    })
-                                }
-                                else{
-                                    var error = new Error("Key could not be authenticated.");
-                                    error.name = "Forbidden"
-                                    error.statusCode = 403;
-                                    cb(error);
-                                }
-                            })
+                    var expiresAt = moment(apiKey.expiresAt);
+                    console.log("EXPIRES: " + expiresAt);
+                    var now = (new Date()).getTime();
+                    console.log("EXPIRES: " + now);
+                    //Check for key expiration date
+                    if(expiresAt > now){
+                        if(apiKey.totalCalls < apiKey.callLimit){
+                            //Check the IP whitelist
+                            if(apiKey.whitelistIps && apiKey.whitelistIps.includes(req.ip)){
+                                //Now that all checks are done, make sure we increase the totalCalls by 1.
+                                Apikey.updateAll({id: apiKey.id}, {totalCalls: apiKey.totalCalls + 1}, (err, result) =>{
+                                    if(!err){
+                                        cb(null, {
+                                            key: apiKey.key,
+                                            status: "OK"
+                                        })
+                                    }
+                                    else{
+                                        var error = new Error("Key could not be authenticated.");
+                                        error.name = "Forbidden"
+                                        error.statusCode = 403;
+                                        cb(error);
+                                    }
+                                })
+                            }
+                            else{
+                                var error = new Error("IP origin not authorized.");
+                                error.name = "Forbidden"
+                                error.statusCode = 403;
+                                cb(error);
+                            }  
                         }
                         else{
-                            var error = new Error("IP origin not authorized.");
+                            var error = new Error("API key limit has been exceeded.");
                             error.name = "Forbidden"
                             error.statusCode = 403;
                             cb(error);
-                        }  
+                        }
                     }
                     else{
-                        var error = new Error("API key limit has been exceeded.");
+                        var error = new Error("API key has expired.");
                         error.name = "Forbidden"
                         error.statusCode = 403;
                         cb(error);
                     }
+                    
                     
                 }
                 else{
