@@ -11,10 +11,12 @@
     "posttest": "npm run lint"
   },
   "dependencies": {
+    "@google-cloud/bigquery": "^2.0.6",
     "@mean-expert/loopback-sdk-builder": "^2.3.1",
     "async": "^2.6.1",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
+    "dotenv": "^6.2.0",
     "helmet": "^3.10.0",
     "loopback": "^3.19.0",
     "loopback-boot": "^2.6.5",
