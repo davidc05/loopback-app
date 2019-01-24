@@ -8,11 +8,11 @@ const bigquery = new BigQuery({
 module.exports = function(Trends) {
     Trends.watchlistByThreatlevel = function(userEmail, cb) {
         // Watchlist by Threat level
-        const sqlQuery = `SELECT queryName, AVG(ips.threat_potential_score_pct) as avg_threat_score
+        const sqlQuery = `SELECT _id as id, queryName, AVG(ips.threat_potential_score_pct) as avg_threat_score
             FROM musubu_watchlist.savedSearch, 
             UNNEST(ips) as ips
             WHERE userEmail = "${userEmail}"
-            GROUP BY queryName
+            GROUP BY _id, queryName
             ORDER BY avg_threat_score DESC`;
 
         const options = {
