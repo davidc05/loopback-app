@@ -71,5 +71,9 @@
   "apiKey": {
     "dataSource": "musubu",
     "public": true
-  }
+  },
+    "trends": {
+        "dataSource": "musubu",
+        "public": true
+    }
 }
