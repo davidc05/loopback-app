@@ -28,8 +28,8 @@ module.exports = function(Apikey) {
                         //Check for key expiration date
                         if(expiresAt > now){
                             if(apiKey.totalCalls < apiKey.callLimit){
-                                //Check the IP whitelist
-                                if(apiKey.whitelistIps && apiKey.whitelistIps.includes(ip)){
+                                //Check if this key uses whitelists and if it does, check the IP whitelist
+                                if(!apiKey.isWhitelistEnabled || (apiKey.whitelistIps && apiKey.whitelistIps.includes(ip))){
                                     //Now that all checks are done, make sure we increase the totalCalls by 1.
                                     Apikey.updateAll({id: apiKey.id}, {totalCalls: apiKey.totalCalls + 1}, (err, result) =>{
                                         if(!err){
