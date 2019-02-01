@@ -3,6 +3,8 @@ var request = require('request');
 const moment = require('moment');
 const uuidAPIKey = require('uuid-apikey');
 const localIp = "127.0.0.1";
+const serverConfig = require('../../server/server-config')
+const userApi = `${serverConfig.host}:${serverConfig.port}/users/`;
 
 module.exports = function(Apikey) {
     Apikey.observe('before save', function(ctx, next) {
@@ -125,4 +127,69 @@ module.exports = function(Apikey) {
             }
         }
     );
+
+    //Creates an API key for a user, either if the user exists on the DB or not.
+    Apikey.createKeyForUser = function(email, cb) {
+        if(email && email.length !== 0){
+            var userFilter = {
+                where: {
+                    email: email
+                }
+            };
+            request(`${userApi}findOne?filter=${JSON.stringify(userFilter)}`, function (error, response, body) {
+                //Function to create API key
+                var createApiKey = userId => {
+                    var expiresAt = moment().add('years', 1).toDate();
+                    var newApiKey = {
+                        userId: userId,
+                        expiresAt: expiresAt,
+                        callLimit: 20000
+                    }
+                    Apikey.create(newApiKey, function(err, result){
+                        cb(null, result);
+                    })
+                }
+                var currentUserResponse = JSON.parse(body);
+                if(!currentUserResponse.error){
+                    createApiKey(currentUserResponse.id)
+                }
+                else{
+                    var newUser = {
+                        email: email
+                    }
+                    request.post({
+                        url: `${userApi}`,
+                        form: newUser
+                    }, 
+                    function (error, response, body) {
+                        var newUserResponse = JSON.parse(body);
+                        createApiKey(newUserResponse.id);
+                    });
+                }
+            });
+        }
+        else{
+            var error = new Error("Email not provided.");
+            error.name = "Bad request"
+            error.statusCode = 400;
+            error.stack = undefined;
+            cb(error);
+        }
+    }
+    Apikey.remoteMethod(
+        'createKeyForUser', {
+            accepts: [{
+                arg: 'email',
+                type:'string'
+            }],
+            http: {
+                path: '/createKeyForUser',
+                verb: 'get'
+            },
+            returns: {
+                type: 'object',
+                root: true
+            }
+        }
+    )
 };
