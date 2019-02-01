@@ -3,7 +3,7 @@ const async = require('async');
 const ipHelpers = require('./ipHelpers');
 const dbConfig = require("../configs/dbConfig.json");
 module.exports ={
-    knownNetworkLookup: (networkName, networkType, networkGroup,
+    knownNetworkLookup: (network,
         page, pageBy, notation, cb) => {
         var resultCount = 0;
         var resultsPage = undefined;
@@ -24,18 +24,18 @@ module.exports ={
 
         // build "where" clause
         var where = "";
-        if(networkName)
-            where += "network_name like \'" + networkName + "\'";
+        if(network.networkName)
+            where += "network_name like \'" + network.networkName + "\'";
 
-        if((networkType) && (where.length > 0))
-            where += " and network_type like \'" + networkType + "\'";
-        else if (networkType != null)
-            where += "network_type like \'" + networkType+ "\'";
+        if((network.networkType) && (where.length > 0))
+            where += " and network_type like \'" + network.networkType + "\'";
+        else if (network.networkType != null)
+            where += "network_type like \'" + network.networkType+ "\'";
 
-        if((networkGroup) && (where.length > 0))
-            where += " and network_group like \'" + networkGroup+ "\'";
-        else if (networkGroup)
-            where += "network_group like \'" + networkGroup+ "\'";
+        if((network.networkGroup) && (where.length > 0))
+            where += " and network_group like \'" + network.networkGroup+ "\'";
+        else if (network.networkGroup)
+            where += "network_group like \'" + network.networkGroup+ "\'";
 
         // first we count
         var sqlGetKNCount = "select count(*) as knownNetworksCount from caatu_known_networks " +

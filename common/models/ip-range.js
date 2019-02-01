@@ -4,24 +4,16 @@ const serverConfig = require('../../server/server-config')
 const apiUrl = `${serverConfig.host}:${serverConfig.port}/MusubuAPI/Musubu?`;
 
 module.exports = function(IpRange) {
-  IpRange.getIpRangeByNetwork = (networkName, networkType, networkGroup, page, pageBy, notation, cb) => {
-    ipRangesService.knownNetworkLookup(networkName, networkType, networkGroup,
+  IpRange.getIpRangeByNetwork = (network, page, pageBy, notation, cb) => {
+    ipRangesService.knownNetworkLookup(network,
       page, pageBy, notation, cb);
   }
   IpRange.remoteMethod(
     'getIpRangeByNetwork', {
       accepts: [
         {
-          arg: 'networkName',
-          type: 'string',
-        },
-        {
-          arg: 'networkType',
-          type: 'string',
-        },
-        {
-          arg: 'networkGroup',
-          type: 'string',
+          arg: 'network',
+          type: 'object',
         },
         {
           arg: 'page',
