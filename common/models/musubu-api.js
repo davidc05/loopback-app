@@ -8,9 +8,9 @@ const serverConfig = require('../../server/server-config')
 const apiUrl = `${serverConfig.host}:${serverConfig.port}/apiKeys/checkKey?`;
 
 module.exports = function(Musubuapi) {
-    Musubuapi.Musubu = (ip, format, verbosity, key, listNeighbors, isp, networkName, networkType, networkGroup, page, pageBy, notation, cb) => {
+    Musubuapi.Musubu = (ip, format, verbosity, key, listNeighbors, isp, networkName, networkType, networkGroup, page, pageBy, notation, req, cb) => {
         //Check for key
-        request(`${apiUrl}key=${key}`, function (error, response, body) {
+        request(`${apiUrl}key=${key}&ip=${req.ip}`, function (error, response, body) {
             var jsonResponse = JSON.parse(body);
             if (jsonResponse.keyResult && jsonResponse.keyResult.status === "OK") {
                 format = "JSON";
@@ -89,6 +89,13 @@ module.exports = function(Musubuapi) {
             {
                 arg: 'ipNotation',
                 type: 'string',
+            },
+            {
+                arg: 'req', 
+                type: 'object', 
+                'http': {
+                    source: 'req'
+                }
             }
           ],
           http: {

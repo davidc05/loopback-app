@@ -31,6 +31,10 @@
       ],
       "default": []
     },
+    "isWhitelistEnabled": {
+      "type": "boolean",
+      "required": false
+    },
     "createdOn": {
       "type": "date",
       "required": true,
