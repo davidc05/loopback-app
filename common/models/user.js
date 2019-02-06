@@ -1,5 +1,7 @@
 'use strict';
 var request = require('request');
+var app = require('../../server/server');
+var sampleWatchlists = require('../../server/sampleWatchlists');
 
 module.exports = function(User) {
     User.validatesInclusionOf('subscriptionPlan', {in: ['free', 'small', 'medium', 'large']});
@@ -55,6 +57,10 @@ module.exports = function(User) {
         },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
+                var SavedSearch = app.models.SavedSearch;
+                SavedSearch.create(sampleWatchlists(email_address)[0]);
+                SavedSearch.create(sampleWatchlists(email_address)[1]);
+
                 cb(null, JSON.parse(body));
             }
             else{
