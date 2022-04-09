@@ -23,7 +23,7 @@
     "loopback-component-explorer": "^6.0.0",
     "loopback-connector-mongodb": "^1.18.1",
     "mariadb": "^2.0.1-beta",
-    "moment": "^2.23.0",
+    "moment": "^2.29.2",
     "mysql": "^2.16.0",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.0.0",
